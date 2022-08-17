@@ -17,7 +17,7 @@ $ItemImage = 'https://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.
 
 $ArrayTable = New-Object 'System.Collections.Generic.List[System.Object]'
 
-$myEvent = Get-EventLog -LogName Security -InstanceId 4740 | Select-object -First 1
+$myEvent = Get-WinEvent -FilterHashtable @{ LogName='Security'; Id='4740' } | Select-Object -first 1
 [string]$Item = $myEvent.Message
 $Item.SubString($Item.IndexOf("Caller Computer Name"))
 $sMachineName = $Item.SubString($Item.IndexOf("Caller Computer Name"))
