@@ -26,7 +26,7 @@ $sMachineName = $sMachineName.TrimEnd("}")
 $sMachineName = $sMachineName.Trim()
 $sMachineName = $sMachineName.TrimStart("\\")
 
-$RecentLockedOutUser = Search-ADAccount -server $DomainContoller -LockedOut | Get-ADUser -Properties badpwdcount, lockoutTime, lockedout, emailaddress | Select-Object badpwdcount, lockedout, Name, EmailAddress, SamAccountName, @{ Name = "LockoutTime"; Expression = { ([datetime]::FromFileTime($_.lockoutTime).ToLocalTime()) } } | Sort-Object LockoutTime -Descending | Select-Object -first 1
+$RecentLockedOutUser = Search-ADAccount -LockedOut | Get-ADUser -Properties badpwdcount, lockoutTime, lockedout, emailaddress | Select-Object badpwdcount, lockedout, Name, EmailAddress, SamAccountName, @{ Name = "LockoutTime"; Expression = { ([datetime]::FromFileTime($_.lockoutTime).ToLocalTime()) } } | Sort-Object LockoutTime -Descending | Select-Object -first 1
 
 $RecentLockedOutUser | ForEach-Object {
 	
