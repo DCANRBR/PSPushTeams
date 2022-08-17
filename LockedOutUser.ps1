@@ -17,8 +17,8 @@ $ItemImage = 'https://img.icons8.com/color/1600/circled-user-male-skin-type-1-2.
 
 $ArrayTable = New-Object 'System.Collections.Generic.List[System.Object]'
 
-$Event = Get-EventLog -LogName Security -InstanceId 4740 | Select-object -First 1
-[string]$Item = $Event.Message
+$myEvent = Get-EventLog -LogName Security -InstanceId 4740 | Select-object -First 1
+[string]$Item = $myEvent.Message
 $Item.SubString($Item.IndexOf("Caller Computer Name"))
 $sMachineName = $Item.SubString($Item.IndexOf("Caller Computer Name"))
 $sMachineName = $sMachineName.TrimStart("Caller Computer Name :")
